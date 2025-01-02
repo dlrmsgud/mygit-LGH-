@@ -28,4 +28,4 @@ int main()
     cout << "평균 : " << avg << endl;
 
     return 0;
-}﻿
+}
