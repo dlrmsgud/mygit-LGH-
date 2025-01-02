@@ -1,0 +1,124 @@
+#include <iostream>
+#include <stdexcept>
+#include <algorithm> // std::sort
+
+template <typename T>
+class SimpleVector {
+private:
+    T* data;               // 동적 배열
+    size_t current_capacity; // 배열의 용량
+    size_t current_size;     // 현재 저장된 원소의 개수
+
+public:
+    // 기본 생성자: 크기가 10인 배열을 생성
+    SimpleVector() : data(new T[10]), current_capacity(10), current_size(0) {}
+
+    // 숫자를 받는 생성자: 해당 숫자 크기의 배열을 생성
+    SimpleVector(size_t init_capacity) : data(new T[init_capacity]), current_capacity(init_capacity), current_size(0) {}
+
+    // 복사 생성자: 기존 객체를 복사하여 새 객체를 생성
+    SimpleVector(const SimpleVector& other) : data(new T[other.current_capacity]), current_capacity(other.current_capacity), current_size(other.current_size) {
+        for (size_t i = 0; i < current_size; ++i) {
+            data[i] = other.data[i]; // 기존 데이터 복사
+        }
+    }
+
+    // 소멸자: 동적 메모리 해제
+    ~SimpleVector() {
+        delete[] data;
+    }
+
+    // 원소를 맨 뒤에 추가하는 함수
+    void push_back(const T& value) {
+        if (current_size >= current_capacity) {
+            // 크기가 꽉 찼으면 5만큼 크기를 늘림
+            resize(current_capacity + 5);
+        }
+        data[current_size] = value; // 데이터 삽입
+        ++current_size;             // current_size 증가
+    }
+
+    // 벡터의 마지막 원소를 제거하는 함수
+    void pop_back() {
+        if (current_size > 0) {
+            --current_size;  // 마지막 원소를 제거
+        }
+    }
+
+    // 현재 벡터의 원소 개수를 반환하는 함수
+    size_t size() const {
+        return current_size;
+    }
+
+    // 내부 배열의 크기(용량)을 반환하는 함수
+    size_t capacity() const {
+        return current_capacity;
+    }
+
+    // 배열의 크기를 조정하는 함수
+    void resize(size_t new_capacity) {
+        if (new_capacity <= current_capacity) {
+            return;  // 새로운 크기가 현재 크기보다 작으면 아무 동작도 하지 않음
+        }
+
+        T* new_data = new T[new_capacity];  // 새로운 배열을 할당
+        for (size_t i = 0; i < current_size; ++i) {
+            new_data[i] = data[i];  // 기존 데이터를 새로운 배열로 복사
+        }
+
+        delete[] data;  // 기존 배열 메모리 해제
+        data = new_data;  // 데이터 포인터 업데이트
+        current_capacity = new_capacity;  // 용량 업데이트
+    }
+
+    // 내부 데이터를 정렬하는 함수
+    void sortData() {
+        std::sort(data, data + current_size);  // std::sort 사용
+    }
+
+    // 벡터의 모든 요소를 출력하는 함수 (디버깅 용도)
+    void print() const {
+        for (size_t i = 0; i < current_size; ++i) {
+            std::cout << data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    SimpleVector<int> vec;  // 기본 생성자로 크기가 10인 벡터 생성
+
+    // 원소 추가
+    vec.push_back(1);
+    vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+
+    // 벡터 내용 출력
+    std::cout << "Vector contents: ";
+    vec.print();
+
+    // 크기와 용량 출력
+    std::cout << "Size: " << vec.size() << std::endl;
+    std::cout << "Capacity: " << vec.capacity() << std::endl;
+
+    // 마지막 원소 제거
+    vec.pop_back();
+    std::cout << "After pop_back, vector contents: ";
+    vec.print();
+
+    std::cout << "Size: " << vec.size() << std::endl;
+    std::cout << "Capacity: " << vec.capacity() << std::endl;
+
+    // 데이터 정렬
+    vec.sortData();
+    std::cout << "After sorting, vector contents: ";
+    vec.print();
+
+    // 복사 생성자 사용
+    SimpleVector<int> vec_copy = vec;
+    std::cout << "Copied vector contents: ";
+    vec_copy.print();
+
+    return 0;
+}
