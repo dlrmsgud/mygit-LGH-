@@ -1,28 +1,31 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "합과 평균 구하기", "합과 평균 구하기\합과 평균 구하기.vcxproj", "{0B7F02E1-86DA-42E2-8E58-8B03A0097845}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Debug|x64.ActiveCfg = Debug|x64
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Debug|x64.Build.0 = Debug|x64
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Debug|x86.ActiveCfg = Debug|Win32
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Debug|x86.Build.0 = Debug|Win32
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Release|x64.ActiveCfg = Release|x64
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Release|x64.Build.0 = Release|x64
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Release|x86.ActiveCfg = Release|Win32
-		{0B7F02E1-86DA-42E2-8E58-8B03A0097845}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    double score[5];
+
+    cout << "1 번째 학생 점수를 입력해주세요 : ";
+    cin >> score[0];
+
+    cout << "2 번째 학생 점수를 입력해주세요 : ";
+    cin >> score[1];
+
+    cout << "3 번째 학생 점수를 입력해주세요 : ";
+    cin >> score[2];
+
+    cout << "4 번째 학생 점수를 입력해주세요 : ";
+    cin >> score[3];
+
+    cout << "5 번째 학생 점수를 입력해주세요 : ";
+    cin >> score[4];
+
+    double tot = score[0] + score[1] + score[2] + score[3] + score[4];
+    double avg = tot / 5;
+
+    cout << "총점 : " << tot << endl;
+    cout << "평균 : " << avg << endl;
+
+    return 0;
+}﻿
