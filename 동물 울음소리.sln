@@ -1,4 +1,4 @@
-﻿#include <iostream >
+#include <iostream>
 using namespace std;
 
 // 기본 클래스: Animal
