@@ -1,0 +1,33 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "MyActor.generated.h"
+
+UCLASS()
+class YOURPROJECT_API AMyActor : public AActor
+{
+    GENERATED_BODY()
+
+public:
+    // Sets default values for this actor's properties
+    AMyActor();
+
+protected:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
+
+public:
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
+
+private:
+    // 현재 위치를 저장하는 변수
+    FVector CurrentPosition;
+
+    // 랜덤으로 0 또는 1을 반환하는 함수
+    int32 Step();
+
+    // 이동을 관리하는 함수
+    void Move();
+};
